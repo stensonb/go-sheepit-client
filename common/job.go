@@ -15,7 +15,7 @@ import (
     "strconv"
     "strings"
 
-    "github.com/stuarta0/go-sheepit-client/hardware"
+    "github.com/stensonb/go-sheepit-client/hardware"
 )
 
 type Job struct {
