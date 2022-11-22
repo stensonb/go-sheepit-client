@@ -1,6 +1,12 @@
-steps:
-- uses: actions/checkout@v3
-- uses: actions/setup-go@v3
-  with:
-    go-version-file: 'go.mod'
-- run: go test ./... -cover
+name: Golang Tests
+run-name: ${{ github.actor }} is testing golang code 🚀
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version-file: 'go.mod'
+      - run: go test ./... -cover
