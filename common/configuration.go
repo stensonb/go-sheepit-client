@@ -10,7 +10,7 @@ import (
 	"log"
 	"path"
 
-	su "github.com/stuarta0/go-sheepit-client/stringutils"
+	su "github.com/stensonb/go-sheepit-client/stringutils"
 )
 
 type ComputeType int
