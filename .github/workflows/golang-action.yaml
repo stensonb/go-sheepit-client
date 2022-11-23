@@ -2,7 +2,7 @@ name: Golang Tests
 run-name: ${{ github.actor }} is testing golang code 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  golang-testing:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
