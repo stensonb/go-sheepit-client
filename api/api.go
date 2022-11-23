@@ -15,9 +15,9 @@ import (
     "reflect"
     "time"
 
-    "github.com/stuarta0/go-sheepit-client/common"
-    "github.com/stuarta0/go-sheepit-client/hardware"
-    su "github.com/stuarta0/go-sheepit-client/stringutils"
+    "github.com/stensonb/go-sheepit-client/common"
+    "github.com/stensonb/go-sheepit-client/hardware"
+    su "github.com/stensonb/go-sheepit-client/stringutils"
 )
 
 type endpoint struct {
