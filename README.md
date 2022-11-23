@@ -6,7 +6,7 @@
 
 This is a fork of the go-sheepit-client written found [here](https://github.com/stuarta0/go-sheepit-client).
 
-**NOTE: This project is a work in progress and will eventualy be used as a replacement for the official Java client**
+**NOTE: This project is a work in progress and will eventually be used as a replacement for the official Java client**
 
 The purpose of this client is to provide a native executable for each platform that interacts with the distributed render farm [SheepIt](https://www.sheepit-renderfarm.com/). This removes the dependency on the JVM which reduces the required overhead and makes server deployment easier.
 
