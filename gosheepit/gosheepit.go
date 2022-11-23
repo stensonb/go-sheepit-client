@@ -11,8 +11,8 @@ import (
 
     "github.com/BurntSushi/toml"
 
-    "github.com/stuarta0/go-sheepit-client/client"
-    "github.com/stuarta0/go-sheepit-client/common"
+    "github.com/stensonb/go-sheepit-client/client"
+    "github.com/stensonb/go-sheepit-client/common"
 )
 
 func main() {
