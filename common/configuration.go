@@ -1,14 +1,14 @@
 package common
 
 import (
-	"fmt"
 	"errors"
-	"time"
+	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"os/user"
-	"log"
 	"path"
+	"time"
 
 	su "github.com/stensonb/go-sheepit-client/stringutils"
 )
@@ -18,30 +18,30 @@ type ComputeType int
 // ComputeType enum
 // https://golang.org/ref/spec#Iota
 const (
-	COMPUTE_CPU_GPU = iota 	// 0
-	COMPUTE_CPU 			// 1
-	COMPUTE_GPU 			// 2
+	COMPUTE_CPU_GPU = iota // 0
+	COMPUTE_CPU            // 1
+	COMPUTE_GPU            // 2
 )
 
 func (d *ComputeType) UnmarshalText(text []byte) error {
-    var err error
-    s := string(text)
-    if s == "CPU" {
-    	*d = COMPUTE_CPU
-    } else if s == "GPU" {
-    	*d = COMPUTE_GPU
-    } else if s == "CPU_GPU" {
-    	*d = COMPUTE_CPU_GPU
-    } else {
-    	err = errors.New(fmt.Sprintf("Compute type %s not recognised.", s))
-    }
-    return err
+	var err error
+	s := string(text)
+	if s == "CPU" {
+		*d = COMPUTE_CPU
+	} else if s == "GPU" {
+		*d = COMPUTE_GPU
+	} else if s == "CPU_GPU" {
+		*d = COMPUTE_CPU_GPU
+	} else {
+		err = errors.New(fmt.Sprintf("Compute type %s not recognised.", s))
+	}
+	return err
 }
 
 type Configuration struct {
-	Server string
-	Proxy string
-	Login string
+	Server   string
+	Proxy    string
+	Login    string
 	Password string `json:"-"`
 
 	// Used for initialisation only
@@ -54,12 +54,12 @@ type Configuration struct {
 	StorageDir string `toml:"storage-dir"`
 
 	MaxUploadingJob int
-	Gpu string `toml:"compute-gpu"` // TODO: calculate GPU device from interrogation of CUDA lib; OS-specific
-	ComputeMethod ComputeType `toml:"compute-method"`
+	Gpu             string      `toml:"compute-gpu"` // TODO: calculate GPU device from interrogation of CUDA lib; OS-specific
+	ComputeMethod   ComputeType `toml:"compute-method"`
 
 	// Total cores to use when rendering. Default all available cores.
 	UseCores int `toml:"cores"`
-	
+
 	// Times during which SheepIt will request new jobs
 	RequestTime []time.Time
 
@@ -124,20 +124,48 @@ func (c *Configuration) SetDefaults() {
 
 func (c *Configuration) Merge(other Configuration) {
 	// Merge will bring in values from [other] when this value is null or default
-	if (su.IsEmpty(c.Server) && !su.IsEmpty(other.Server)) { c.Server = other.Server }
-	if (su.IsEmpty(c.Login) && !su.IsEmpty(other.Login)) { c.Login = other.Login }
-	if (su.IsEmpty(c.Password) && !su.IsEmpty(other.Password)) { c.Password = other.Password }
-	if (su.IsEmpty(c.CacheDir) && !su.IsEmpty(other.CacheDir)) { c.CacheDir = other.CacheDir }
-	if (su.IsEmpty(c.ProjectDir) && !su.IsEmpty(other.ProjectDir)) { c.ProjectDir = other.ProjectDir }
-	if (su.IsEmpty(c.StorageDir) && !su.IsEmpty(other.StorageDir)) { c.StorageDir = other.StorageDir }
-	if (c.MaxUploadingJob < 0 && other.MaxUploadingJob > 0) { c.MaxUploadingJob = other.MaxUploadingJob }
-	if (su.IsEmpty(c.Gpu) && !su.IsEmpty(other.Gpu)) { c.Gpu = other.Gpu }
-	if (c.ComputeMethod != other.ComputeMethod) { c.ComputeMethod = other.ComputeMethod }
-	if (c.UseCores < 0 && other.UseCores > 0) { c.UseCores = other.UseCores }
+	if su.IsEmpty(c.Server) && !su.IsEmpty(other.Server) {
+		c.Server = other.Server
+	}
+	if su.IsEmpty(c.Login) && !su.IsEmpty(other.Login) {
+		c.Login = other.Login
+	}
+	if su.IsEmpty(c.Password) && !su.IsEmpty(other.Password) {
+		c.Password = other.Password
+	}
+	if su.IsEmpty(c.CacheDir) && !su.IsEmpty(other.CacheDir) {
+		c.CacheDir = other.CacheDir
+	}
+	if su.IsEmpty(c.ProjectDir) && !su.IsEmpty(other.ProjectDir) {
+		c.ProjectDir = other.ProjectDir
+	}
+	if su.IsEmpty(c.StorageDir) && !su.IsEmpty(other.StorageDir) {
+		c.StorageDir = other.StorageDir
+	}
+	if c.MaxUploadingJob < 0 && other.MaxUploadingJob > 0 {
+		c.MaxUploadingJob = other.MaxUploadingJob
+	}
+	if su.IsEmpty(c.Gpu) && !su.IsEmpty(other.Gpu) {
+		c.Gpu = other.Gpu
+	}
+	if c.ComputeMethod != other.ComputeMethod {
+		c.ComputeMethod = other.ComputeMethod
+	}
+	if c.UseCores < 0 && other.UseCores > 0 {
+		c.UseCores = other.UseCores
+	}
 	// requestTime
-	if (su.IsEmpty(c.Proxy) && !su.IsEmpty(other.Proxy)) { c.Proxy = other.Proxy }
-	if (su.IsEmpty(c.Extras) && !su.IsEmpty(other.Extras)) { c.Extras = other.Extras }
+	if su.IsEmpty(c.Proxy) && !su.IsEmpty(other.Proxy) {
+		c.Proxy = other.Proxy
+	}
+	if su.IsEmpty(c.Extras) && !su.IsEmpty(other.Extras) {
+		c.Extras = other.Extras
+	}
 	// uiType
-	if (c.Priority == 0 && other.Priority != 0) { c.Priority = other.Priority }
-	if (c.TileSize < 0 && other.TileSize > 0) { c.TileSize = other.TileSize }
+	if c.Priority == 0 && other.Priority != 0 {
+		c.Priority = other.Priority
+	}
+	if c.TileSize < 0 && other.TileSize > 0 {
+		c.TileSize = other.TileSize
+	}
 }

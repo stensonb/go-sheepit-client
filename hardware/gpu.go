@@ -1,9 +1,9 @@
 package hardware
 
 type Gpu struct {
-    Model string
-    CudaName string
-    TotalMemory uint64
+	Model       string
+	CudaName    string
+	TotalMemory uint64
 }
 
 // Computer interface
@@ -17,7 +17,7 @@ func (c *Gpu) GetComputeDeviceName() string {
 	return c.CudaName
 }
 func (c *Gpu) GetOptimalTileSize() int {
-	if c.TotalMemory > 1073741824 {
+	if c.TotalMemory > 1_073_741_824 {
 		return 256
 	} else {
 		return 128
