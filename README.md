@@ -1,5 +1,7 @@
 # (Go)SheepIt Render Farm Client
 
+![build pipeline](https://github.com/stensonb/go-sheepit-client/actions/workflows/main.yml/badge.svg)
+
 ## Overview
 
 This is a fork of the go-sheepit-client written found [here](https://github.com/stuarta0/go-sheepit-client).
@@ -33,7 +35,14 @@ Please file an issue, and submit a PR against this repo for review.
 
 ## Current Roadmap
 ### v1.0.0
-* successfully rendering scenes on linux machines
+* successfully rendering scenes on linux machines via cpu
+* released pre-built binaries to make installation/execution easy
 
 ## Future Roadmap Items
+* successfully rendering scenes on non-linux machines via cpu
+* successfully rendering scenes on machines via gpu
 * UI for gosheepit delivered over http server on localhost
+* pluggable storage backend? s3? ipfs?
+* deployed as docker container?
+* helm chart? 
+* teach client about non-sheepit servers?
