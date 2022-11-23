@@ -8,10 +8,10 @@ import (
     "path"
     "time"
 
-    "github.com/stuarta0/go-sheepit-client/common"
-    "github.com/stuarta0/go-sheepit-client/storage"
-    "github.com/stuarta0/go-sheepit-client/hardware"
-    "github.com/stuarta0/go-sheepit-client/api"
+    "github.com/stensonb/go-sheepit-client/common"
+    "github.com/stensonb/go-sheepit-client/storage"
+    "github.com/stensonb/go-sheepit-client/hardware"
+    "github.com/stensonb/go-sheepit-client/api"
 )
 
 
