@@ -204,8 +204,8 @@ func (api *Api) SendHeartbeat(job *common.Job) (time.Duration, error) {
             v.Set("extras", job.Extras)
         }
         if job.Renderer != nil {
-            v.Set("rendertime", fmt.Sprintf("%d", job.Renderer.ElapsedDuration.Seconds()))
-            v.Set("remainingtime", fmt.Sprintf("%d", job.Renderer.RemainingDuration.Seconds()))
+            v.Set("rendertime", fmt.Sprintf("%v", job.Renderer.ElapsedDuration.Seconds()))
+            v.Set("remainingtime", fmt.Sprintf("%v", job.Renderer.RemainingDuration.Seconds()))
         }
 
         url := fmt.Sprintf("%s/%s?%s", api.Server, endpoint.Location, v.Encode())
