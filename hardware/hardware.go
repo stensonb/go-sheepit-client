@@ -4,8 +4,10 @@ import (
 	"log"
 	"path"
 
+/*
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/host"
+*/
 	"github.com/shirou/gopsutil/v3/mem"
 )
 
@@ -19,7 +21,8 @@ func RendererPath() string {
 
 func CpuStat() *Cpu {
 
-	//cpu := Cpu{Family: "6", Name: "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz", Model: "i7-6700", Cores: 8, Architecture: "64bit"}
+	ans := Cpu{Family: "6", Name: "Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz", Model: "i7-6700", TotalCores: 8, Architecture: "64bit"}
+/*
 	ans := Cpu{Family: "", Name: "", Model: "Unknown", TotalCores: 0, Architecture: "32bit"}
 
 	is, err := cpu.Info()
@@ -44,6 +47,7 @@ func CpuStat() *Cpu {
 	ans.Model = is[0].ModelName
 	ans.TotalCores = coreCount
 	ans.Architecture = hostArch
+*/
 
 	return &ans
 }

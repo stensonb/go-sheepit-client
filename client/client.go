@@ -1,7 +1,7 @@
 package client
 
 import (
-	"errors"
+	//	"errors"
 	//"fmt"
 	"log"
 	"os"
@@ -23,13 +23,15 @@ func (c *Client) Run() error {
 		return e
 	}
 
-	// if !OS supported, panic
-	// if !CPU supported, panic
+	// if !OS supported, return error
+	// if !CPU supported, return error
 	cpu := hardware.CpuStat()
 	log.Printf("%s, %s, %s, %s, %v\n", cpu.Name, cpu.Family, cpu.Model, cpu.Architecture, cpu.TotalCores)
-	if !cpu.IsValid() {
-		return errors.New("CPU not supported.")
-	}
+	/*
+		if !cpu.IsValid() {
+			return errors.New("CPU not supported.")
+		}
+	*/
 
 	// clean working/storage directory (delete all directories and any files that are ZIPs with filenames that don't match their MD5 hash)
 

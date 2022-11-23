@@ -94,7 +94,13 @@ func New(c common.Configuration) (*Api, error) {
 	v.Set("ram", fmt.Sprintf("%d", hardware.TotalMemory()))
 	v.Set("bits", cpu.Architecture)
 	v.Set("version", "5.290.2718")
-	v.Set("hostname", "stuarta0-skylake")
+
+	hostname, err := os.Hostname()
+	if err != nil {
+		return nil, err
+	}
+
+	v.Set("hostname", hostname)
 	v.Set("extras", c.Extras)
 	if c.UseCores > 0 {
 		v.Set("cpu_cores", fmt.Sprintf("%d", c.UseCores))
@@ -103,6 +109,7 @@ func New(c common.Configuration) (*Api, error) {
 	}
 
 	url := fmt.Sprintf("%s/server/config.php?%s", api.Server, v.Encode())
+	log.Println(url)
 	resp, err := api.client.Get(url)
 	if err != nil {
 		return nil, err
@@ -167,6 +174,7 @@ func (api *Api) RequestJob(c common.Configuration) (*common.Job, error) {
 	}
 
 	url := fmt.Sprintf("%s/%s?%s", api.Server, api.endpoints["request-job"].Location, v.Encode())
+        log.Println(url)
 	resp, err := api.client.Get(url)
 	if err != nil {
 		fmt.Println("Request failed")
@@ -234,7 +242,7 @@ func (api *Api) SendHeartbeat(job *common.Job) (time.Duration, error) {
 		}
 
 		if xmlK.Status == common.KEEPMEALIVE_STOP_RENDERING {
-			log.Println("Server::keeepmealive server asked to kill local render process")
+			log.Println("Server::keepmealive server asked to kill local render process")
 			job.Cancel()
 		}
 	}
