@@ -3,7 +3,10 @@ run-name: Testing golang code 🚀
 on: [push, pull_request]
 jobs:
   golang-testing:
-    runs-on: [ubuntu-latest, macos-latest, windows-latest]
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v3
